@@ -62,7 +62,7 @@ func (c *Client) List() []Address {
 
 	c.browser.Find(".ox-list li").Each(func(_ int, s *goquery.Selection) {
 		addresses = append(addresses, Address{
-			Email:   s.Find(".title div").Text(),
+			Email:   s.Find(".title").Text(),
 			Memo:    s.Find(".memo #memo").AttrOr("value", ""),
 			Expires: expiresTextToISO8061Date(s.Find(".content div").Text()),
 		})
