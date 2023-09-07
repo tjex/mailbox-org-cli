@@ -17,7 +17,7 @@ type RenewCommand struct {
 }
 
 type RenewAllCommand struct {
-    // no arg needed
+	// no arg needed
 }
 
 type DeleteCommand struct {
