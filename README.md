@@ -20,7 +20,7 @@ If you have Go installed, you can either:
 
 ```text
 Command line "client" for mailbox.org dispossable addresses feature
-mailbox-org-cli 0.1.0
+mailbox-org-cli 0.1.1
 Usage: mailbox-org-cli --username USERNAME [--password PASSWORD] [--password-on-stdin] <command> [<args>]
 
 Options:

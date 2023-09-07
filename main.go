@@ -50,7 +50,7 @@ func (args) Description() string {
 }
 
 func (args) Version() string {
-	return "mailbox-org-cli 0.1.0"
+	return "mailbox-org-cli 0.1.1"
 }
 
 func main() {
