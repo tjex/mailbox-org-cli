@@ -33,6 +33,7 @@ Options:
 Commands:
   list                   list dispossable addresses
   renew                  renew dispossable address
+  renew-all              renew all disposable addresses
   delete                 delete dispossable address
   set-memo               set-memo on existing dispossable address
   create                 create new dispossable address with optional memo
