@@ -14,7 +14,8 @@ now!
 If you have Go installed, you can either:
 
 * install it from source `go install github.com/tjex/mailbox-org-cli@latest`
-* clone repository and build it by yourself: `go build .` (requires Go 1.20)
+* clone repository and build it by yourself: `go build .` (requires Go 1.20) or `go install .` (installs to
+  ${GOPATH}/bin)
 
 ## Usage
 
