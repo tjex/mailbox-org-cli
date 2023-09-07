@@ -6,6 +6,9 @@ TBH it's hard to call it client - it **does not** use API for achieve its goals,
 
 What it does it pretends to be browser and interacts with management panel in good-old form-based way.
 
+This is a fork of [singles' repo](https://github.com/singles/mailbox-org-cli), who has ceased development of the project. Issues and PRs are welcome here
+now!
+
 ## Installation
 
 If you have Go installed, you can either:
@@ -37,6 +40,7 @@ Commands:
 
 Here is an example how you can use this command with password manager:
 
+list all disposable emails:
 ```text
 $ pass Email/mailbox.org | mailbox-org-cli --username you@example.com --password-on-stdin list
 
@@ -53,8 +57,16 @@ $ pass Email/mailbox.org | mailbox-org-cli --username you@example.com --password
   }
 ]
 ```
+Renew a disposable email:
+```text
 
-All output is JSON, so you will probably need something like [`jq`](https://github.com/stedolan/jq) to extract specific data. Using example output above this command will copy first item's email into clipboard (`pbcopy` on macOS):
+$ pass Email/mailbox.org | mailbox-org-cli --username you@example.com --password-on-stdin renew --id
+<your-disposable-email@temp.mailbox.org>
+```
+
+In terms of scripting, all output is JSON, so you will probably need something like
+[`jq`](https://github.com/stedolan/jq) to extract specific data. Using example output above this command will
+copy first item's email into clipboard (`pbcopy` on macOS):
 
 ```text
 mailbox-org-cli ... list | jq --raw '.[0].email' | pbcopy
@@ -66,7 +78,7 @@ mailbox-org-cli ... list | jq --raw '.[0].email' | pbcopy
 * as this is CLI tool, you can easily integrate it with some launcher like [Alfred](https://www.alfredapp.com/)
 * ...your idea :)
 
-### Design decisions
+### Design decisions (from the original dev, Singles)
 
 1. Why it's in Go instead of JS/Python/PHP/other-scripting-language ?
 
