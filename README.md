@@ -1,9 +1,3 @@
-# IMPORTANT
-
-This project is archived, as I don't use Mailbox.org anymore and therefore I cannot test any potential changes. Feel free to fork it or use one of the [existing forks](https://github.com/singles/mailbox-org-cli/forks) instead.
-
----
-
 # mailbox-org-cli
 
 **Unoffical** command line "client" for managing [mailbox.org](https://mailbox.org) [disposable addresses](https://mailbox.org/en/post/more-privacy-with-anonymous-disposable-e-mail-addresses).
@@ -14,12 +8,10 @@ What it does it pretends to be browser and interacts with management panel in go
 
 ## Installation
 
-You can download prebuilt binary from [Releases](https://github.com/singles/mailbox-org-cli/releases) page, but at the moment macOS binary **isn't** signed & notarized so you will get a warning that application cannot be verified.
-
 If you have Go installed, you can either:
 
-* install it from source `go install github.com/singles/mailbox-org-cli@latest`
-* clone repository and build it by yourself: `go build .` (requires Go 1.17)
+* install it from source `go install github.com/tjex/mailbox-org-cli@latest`
+* clone repository and build it by yourself: `go build .` (requires Go 1.20)
 
 ## Usage
 
