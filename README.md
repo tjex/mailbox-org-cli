@@ -41,8 +41,6 @@ Commands:
 ```
 
 Here is an example how you can use this command with password manager:
-
-list all disposable emails:
 ```text
 $ pass Email/mailbox.org | mailbox-org-cli --username you@example.com --password-on-stdin list
 
@@ -59,11 +57,13 @@ $ pass Email/mailbox.org | mailbox-org-cli --username you@example.com --password
   }
 ]
 ```
-Renew a disposable email:
+Or just input the password manually:
 ```text
 
-$ pass Email/mailbox.org | mailbox-org-cli --username you@example.com --password-on-stdin renew --id
-<your-disposable-email@temp.mailbox.org>
+$ mailbox-org-cli --username you@example.com --password "your-secure-password" renew --id
+your-disposable-email@temp.mailbox.org
+
+$ mailbox-org-cli --username you@example.com --password "your-secure-password" renew-all
 ```
 
 In terms of scripting, all output is JSON, so you will probably need something like
