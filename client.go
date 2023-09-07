@@ -104,6 +104,22 @@ func (c *Client) Renew(id string) (Address, error) {
 	return c.findAddressByID(id), nil
 }
 
+func (c *Client) RenewAll(id string) (Address, error) {
+	// get all emails and fill into a slice
+	emails := []string{}
+	for _, address := range c.List() {
+		emails = append(emails, address.Email)
+	}
+	// executeAction renew for each email
+
+	err := c.executeAction(FormPayload{"action": "renew", "id": id})
+	if err != nil {
+		return Address{}, err
+	}
+
+	return c.findAddressByID(id), nil
+}
+
 func (c *Client) SetMemo(id, memo string) (Address, error) {
 	err := c.executeAction(FormPayload{"action": "edit_memo", "id": id, "memo": memo})
 	if err != nil {
