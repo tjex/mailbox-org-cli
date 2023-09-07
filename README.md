@@ -60,10 +60,10 @@ $ pass Email/mailbox.org | mailbox-org-cli --username you@example.com --password
 Or just input the password manually:
 ```text
 
-$ mailbox-org-cli --username you@example.com --password "your-secure-password" renew --id
+$ mailbox-org-cli --username you@example.com --password "your-password" renew --id
 your-disposable-email@temp.mailbox.org
 
-$ mailbox-org-cli --username you@example.com --password "your-secure-password" renew-all
+$ mailbox-org-cli --username you@example.com --password "your-password" renew-all
 ```
 
 In terms of scripting, all output is JSON, so you will probably need something like
