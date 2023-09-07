@@ -119,6 +119,7 @@ func (c *Client) RenewAll() ([]Address, error) {
 		}
 	}
 
+	fmt.Println("Emails renewed:")
 	return c.List(), nil
 
 }

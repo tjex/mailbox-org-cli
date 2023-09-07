@@ -16,6 +16,10 @@ type RenewCommand struct {
 	ID string `arg:"required"`
 }
 
+type RenewAllCommand struct {
+    // no arg needed
+}
+
 type DeleteCommand struct {
 	ID string `arg:"required"`
 }
@@ -30,14 +34,15 @@ type CreateCommand struct {
 }
 
 type args struct {
-	Username        string          `arg:"required,env:MAILBOX_ORG_USERNAME" help:"mailbox.org username"`
-	Password        string          `arg:"env:MAILBOX_ORG_PASSWORD" help:"mailbox.org password"`
-	PasswordOnStdin bool            `arg:"--password-on-stdin" help:"read password from stdin"`
-	List            *ListCommand    `arg:"subcommand:list" help:"list dispossable addresses"`
-	Renew           *RenewCommand   `arg:"subcommand:renew" help:"renew dispossable address"`
-	Delete          *DeleteCommand  `arg:"subcommand:delete" help:"delete dispossable address"`
-	SetMemo         *SetMemoCommand `arg:"subcommand:set-memo" help:"set-memo on existing dispossable address"`
-	Create          *CreateCommand  `arg:"subcommand:create" help:"create new dispossable address with optional memo"`
+	Username        string           `arg:"required,env:MAILBOX_ORG_USERNAME" help:"mailbox.org username"`
+	Password        string           `arg:"env:MAILBOX_ORG_PASSWORD" help:"mailbox.org password"`
+	PasswordOnStdin bool             `arg:"--password-on-stdin" help:"read password from stdin"`
+	List            *ListCommand     `arg:"subcommand:list" help:"list dispossable addresses"`
+	Renew           *RenewCommand    `arg:"subcommand:renew" help:"renew dispossable address"`
+	RenewAll        *RenewAllCommand `arg:"subcommand:renew-all" help:"renew all dispossable addresses"`
+	Delete          *DeleteCommand   `arg:"subcommand:delete" help:"delete dispossable address"`
+	SetMemo         *SetMemoCommand  `arg:"subcommand:set-memo" help:"set-memo on existing dispossable address"`
+	Create          *CreateCommand   `arg:"subcommand:create" help:"create new dispossable address with optional memo"`
 }
 
 func (args) Description() string {
@@ -80,6 +85,8 @@ func main() {
 		data = client.List()
 	case args.Renew != nil:
 		data, err = client.Renew(args.Renew.ID)
+	case args.RenewAll != nil:
+		data, err = client.RenewAll()
 	case args.Delete != nil:
 		err = client.Delete(args.Delete.ID)
 	case args.Create != nil:
