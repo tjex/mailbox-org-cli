@@ -4,10 +4,9 @@ import (
 	"bufio"
 	"encoding/json"
 	"fmt"
+	"github.com/alexflint/go-arg"
 	"io"
 	"os"
-
-	"github.com/alexflint/go-arg"
 )
 
 type ListCommand struct{}
