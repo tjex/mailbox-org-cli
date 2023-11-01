@@ -39,7 +39,7 @@ Commands:
   create                 create new dispossable address with optional memo
 ```
 
-Here is an example how you can use this command with password manager:
+Here is an example how you can use this command with [`pass`](https://www.passwordstore.org/) manager:
 ```text
 $ pass Email/mailbox.org | mailbox-org-cli --username you@example.com --password-on-stdin list
 
