@@ -70,7 +70,8 @@ In terms of scripting, all output is JSON, so you will probably need something l
 copy first item's email into clipboard (`pbcopy` on macOS):
 
 ```text
-mailbox-org-cli ... list | jq --raw '.[0].email' | pbcopy
+mailbox-org-cli create | jq -r '.email' | pbcopy
+mailbox-org-cli ... list | jq -r '.[0].email' | pbcopy
 ```
 
 ### Possible use cases
