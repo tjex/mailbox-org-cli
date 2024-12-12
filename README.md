@@ -24,8 +24,8 @@ mailbox-org-cli 0.1.1
 Usage: mailbox-org-cli --username USERNAME [--password PASSWORD] [--password-on-stdin] <command> [<args>]
 
 Options:
-  --username USERNAME    mailbox.org username [env: MAILBOX_ORG_USERNAME]
-  --password PASSWORD    mailbox.org password [env: MAILBOX_ORG_PASSWORD]
+  --username USERNAME    mailbox.org username [env: $MAILBOX_ORG_USERNAME]
+  --password PASSWORD    mailbox.org password [env: $MAILBOX_ORG_PASSWORD]
   --password-on-stdin    read password from stdin
   --help, -h             display this help and exit
   --version              display version and exit
@@ -56,13 +56,17 @@ $ pass Email/mailbox.org | mailbox-org-cli --username you@example.com --password
   }
 ]
 ```
-Or just input the password manually:
-```text
 
-$ mailbox-org-cli --username you@example.com --password "your-password" renew --id
-your-disposable-email@temp.mailbox.org
+Or use environment variables:
 
-$ mailbox-org-cli --username you@example.com --password "your-password" renew-all
+```sh
+# ~/.zshenv
+export MAILBOX_ORG_PASSWORD="strong-password"
+export MAILBOX_ORG_USERNAME="weak-email@mailbox.org"
+```
+
+```sh
+$ mailbox-org-cli renew --id aks92jasl943@temp.mailbox.org
 ```
 
 In terms of scripting, all output is JSON, so you can use
@@ -70,8 +74,8 @@ In terms of scripting, all output is JSON, so you can use
 output above this command will copy first item's email into clipboard:
 
 ```text
-mailbox-org-cli <credentials> create | jq -r '.email' | <your-clipboard-program>
-mailbox-org-cli <credentials> list | jq -r '.[0].email' | <your-clipboard-program> 
+mailbox-org-cli create | jq -j '.email' | <your-clipboard-program>
+mailbox-org-cli list | jq -j '.[0].email' | <your-clipboard-program> 
 ```
 
 ### Possible use cases
