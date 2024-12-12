@@ -65,13 +65,13 @@ your-disposable-email@temp.mailbox.org
 $ mailbox-org-cli --username you@example.com --password "your-password" renew-all
 ```
 
-In terms of scripting, all output is JSON, so you will probably need something like
-[`jq`](https://github.com/stedolan/jq) to extract specific data. Using example output above this command will
-copy first item's email into clipboard (`pbcopy` on macOS):
+In terms of scripting, all output is JSON, so you can use
+[`jq`](https://github.com/stedolan/jq) to extract specific data. Using example
+output above this command will copy first item's email into clipboard:
 
 ```text
-mailbox-org-cli create | jq -r '.email' | pbcopy
-mailbox-org-cli ... list | jq -r '.[0].email' | pbcopy
+mailbox-org-cli <credentials> create | jq -r '.email' | <your-clipboard-program>
+mailbox-org-cli <credentials> list | jq -r '.[0].email' | <your-clipboard-program> 
 ```
 
 ### Possible use cases
