@@ -100,7 +100,7 @@ func (c *Client) Create(memo string) (Address, error) {
 
 	errorBox := c.browser.Find("#content .error")
 	if errorBox.Length() > 0 {
-		return Address{}, fmt.Errorf(strings.TrimSpace(errorBox.Text()))
+		return Address{}, fmt.Errorf("%s", strings.TrimSpace(errorBox.Text()))
 	}
 
 	return c.findAddressByID(newAddress.Email), nil
