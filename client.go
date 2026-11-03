@@ -107,6 +107,7 @@ func (c *Client) Create(memo string) (Address, error) {
 }
 
 func (c *Client) Renew(email string) (Address, error) {
+	email = addDomainToLocalPart(email)
 	err := c.executeAction(FormPayload{"action": "renew", "id": email})
 	if err != nil {
 		return Address{}, err
@@ -136,6 +137,7 @@ func (c *Client) RenewAll() ([]Address, error) {
 }
 
 func (c *Client) SetMemo(email, memo string) (Address, error) {
+	email = addDomainToLocalPart(email)
 	err := c.executeAction(FormPayload{"action": "edit_memo", "id": email, "memo": memo})
 	if err != nil {
 		return Address{}, err
@@ -145,6 +147,7 @@ func (c *Client) SetMemo(email, memo string) (Address, error) {
 }
 
 func (c *Client) Delete(email string) error {
+	email = addDomainToLocalPart(email)
 	return c.executeAction(FormPayload{"action": "delete", "id": email})
 }
 
@@ -159,6 +162,7 @@ func (c *Client) executeAction(data FormPayload) error {
 }
 
 func (c *Client) findAddressByEmail(email string) Address {
+	email = addDomainToLocalPart(email)
 	for _, address := range c.List() {
 		if address.Email == email {
 			return address
@@ -178,4 +182,13 @@ func expiresTextToISO8061Date(expires string) string {
 	t, _ := time.Parse(EXPIRES_DATE_LAYOUT, match)
 
 	return t.Format(ISO8061_DATE_LAYOUT)
+}
+
+func addDomainToLocalPart(email string) string {
+	if strings.HasSuffix(email, "@temp.mailbox.org") {
+		return email
+	}
+
+	email = email + "@temp.mailbox.org"
+	return email
 }
