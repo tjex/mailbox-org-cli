@@ -78,7 +78,7 @@ export MAILBOX_ORG_USERNAME="weak-email@mailbox.org"
 ```
 
 ```sh
-$ mailbox-org-cli renew --id aks92jasl943@temp.mailbox.org
+$ mailbox-org-cli renew --email aks92jasl943@temp.mailbox.org
 ```
 
 In terms of scripting, all output is JSON, so you can use

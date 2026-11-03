@@ -103,16 +103,16 @@ func (c *Client) Create(memo string) (Address, error) {
 		return Address{}, fmt.Errorf("%s", strings.TrimSpace(errorBox.Text()))
 	}
 
-	return c.findAddressByID(newAddress.Email), nil
+	return c.findAddressByEmail(newAddress.Email), nil
 }
 
-func (c *Client) Renew(id string) (Address, error) {
-	err := c.executeAction(FormPayload{"action": "renew", "id": id})
+func (c *Client) Renew(email string) (Address, error) {
+	err := c.executeAction(FormPayload{"action": "renew", "id": email})
 	if err != nil {
 		return Address{}, err
 	}
 
-	return c.findAddressByID(id), nil
+	return c.findAddressByEmail(email), nil
 }
 
 func (c *Client) RenewAll() ([]Address, error) {
@@ -135,17 +135,17 @@ func (c *Client) RenewAll() ([]Address, error) {
 
 }
 
-func (c *Client) SetMemo(id, memo string) (Address, error) {
-	err := c.executeAction(FormPayload{"action": "edit_memo", "id": id, "memo": memo})
+func (c *Client) SetMemo(email, memo string) (Address, error) {
+	err := c.executeAction(FormPayload{"action": "edit_memo", "id": email, "memo": memo})
 	if err != nil {
 		return Address{}, err
 	}
 
-	return c.findAddressByID(id), nil
+	return c.findAddressByEmail(email), nil
 }
 
-func (c *Client) Delete(id string) error {
-	return c.executeAction(FormPayload{"action": "delete", "id": id})
+func (c *Client) Delete(email string) error {
+	return c.executeAction(FormPayload{"action": "delete", "id": email})
 }
 
 func (c *Client) executeAction(data FormPayload) error {
@@ -158,9 +158,9 @@ func (c *Client) executeAction(data FormPayload) error {
 	return c.browser.PostForm("https://manage.mailbox.org/index.php?p=account_disposable_aliases", values)
 }
 
-func (c *Client) findAddressByID(id string) Address {
+func (c *Client) findAddressByEmail(email string) Address {
 	for _, address := range c.List() {
-		if address.Email == id {
+		if address.Email == email {
 			return address
 		}
 	}

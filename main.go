@@ -12,7 +12,7 @@ import (
 type ListCommand struct{}
 
 type RenewCommand struct {
-	ID string `arg:"required"`
+	Email string `arg:"required"`
 }
 
 type RenewAllCommand struct {
@@ -20,12 +20,12 @@ type RenewAllCommand struct {
 }
 
 type DeleteCommand struct {
-	ID string `arg:"required"`
+	Email string `arg:"required"`
 }
 
 type SetMemoCommand struct {
-	ID   string `arg:"required"`
-	Memo string `arg:"required"`
+	Email string `arg:"required"`
+	Memo  string `arg:"required"`
 }
 
 type CreateCommand struct {
@@ -85,15 +85,15 @@ func main() {
 	case args.List != nil:
 		data = client.List()
 	case args.Renew != nil:
-		data, err = client.Renew(args.Renew.ID)
+		data, err = client.Renew(args.Renew.Email)
 	case args.RenewAll != nil:
 		data, err = client.RenewAll()
 	case args.Delete != nil:
-		err = client.Delete(args.Delete.ID)
+		err = client.Delete(args.Delete.Email)
 	case args.Create != nil:
 		data, err = client.Create(args.Create.Memo)
 	case args.SetMemo != nil:
-		data, err = client.SetMemo(args.SetMemo.ID, args.SetMemo.Memo)
+		data, err = client.SetMemo(args.SetMemo.Email, args.SetMemo.Memo)
 	default:
 		p.Fail("Invalid command")
 	}
