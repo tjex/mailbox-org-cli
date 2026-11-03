@@ -1,4 +1,4 @@
-VERSION := $(shell git describe --tags --exact-match 2>/dev/null || git rev-parse --short HEAD)
+VERSION := $(shell if test -n "$$(git status --porcelain)"; then printf dirty; else git describe --tags --exact-match 2>/dev/null || git rev-parse --short HEAD; fi)
 PREFIX ?= $(HOME)/.local
 BINDIR ?= $(PREFIX)/bin
 
