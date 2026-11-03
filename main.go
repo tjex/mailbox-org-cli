@@ -32,6 +32,8 @@ type CreateCommand struct {
 	Memo string `default:""`
 }
 
+var version = "dev"
+
 type args struct {
 	Username        string           `arg:"required,env:MAILBOX_ORG_USERNAME" help:"mailbox.org username"`
 	Password        string           `arg:"env:MAILBOX_ORG_PASSWORD" help:"mailbox.org password"`
@@ -49,7 +51,7 @@ func (args) Description() string {
 }
 
 func (args) Version() string {
-	return "mailbox-org-cli 0.1.1"
+	return "mailbox-org-cli " + version
 }
 
 func main() {
