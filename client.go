@@ -32,26 +32,37 @@ func NewClient(username, password string) (*Client, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	fm, _ := client.browser.Form("#io-ox-login-form")
-	err = fm.Input("username", username)
-	if fm.Submit() != nil {
-		return nil, err
+	if client.browser.StatusCode() != 200 {
+		return nil, fmt.Errorf("open login page: HTTP %d", client.browser.StatusCode())
 	}
 
-	err = fm.Input("password", password)
-	if fm.Submit() != nil {
-		return nil, err
+	fm, err := client.browser.Form("#io-ox-login-form")
+	if err != nil {
+		return nil, fmt.Errorf("find login form: %w", err)
 	}
-
-	if fm.Submit() != nil {
-		return nil, err
+	if err := fm.Input("username", username); err != nil {
+		return nil, fmt.Errorf("set login username: %w", err)
+	}
+	if err := fm.Input("password", password); err != nil {
+		return nil, fmt.Errorf("set login password: %w", err)
+	}
+	if err := fm.Submit(); err != nil {
+		return nil, fmt.Errorf("submit login form: %w", err)
+	}
+	if client.browser.StatusCode() != 200 {
+		return nil, fmt.Errorf("submit login form: HTTP %d", client.browser.StatusCode())
 	}
 
 	errorBox := client.browser.Find("#io-ox-login-container .error")
 
 	if errorBox.Length() > 0 {
-		return nil, fmt.Errorf(strings.TrimSpace(errorBox.Text()))
+		return nil, fmt.Errorf("%s", strings.TrimSpace(errorBox.Text()))
+	}
+	if client.browser.Find("#io-ox-login-form").Length() > 0 {
+		return nil, fmt.Errorf("login failed: login form is still present")
+	}
+	if client.browser.Find(".ox-list").Length() == 0 {
+		return nil, fmt.Errorf("login failed: disposable-address list not found")
 	}
 
 	return client, nil

@@ -1,10 +1,9 @@
 # mailbox-org-cli
 
-> [!IMPORTANT] 
-> This project is non-functional for now. Mailbox.org have updated
-> their login mechanism, which broke this program completely. I will hopefully
-> get around to addressing this in the future, but it's fairly low down on my
-> priority list. PR's welcome.
+> [!IMPORTANT]
+> This client uses the direct mailbox.org management login, not the public
+> JavaScript/OIDC login. Your account must allow password-based management login.
+> The client does not perform interactive two-factor authentication.
 
 **Unoffical** command line "client" for managing
 [mailbox.org](https://mailbox.org)
@@ -111,13 +110,12 @@ interpreter installed.
 Technically - this could be written as a Bash script contining some `curl`s and
 HTML parsing, but see above :)
 
-2. Why there are no tests?
+2. How is login tested?
 
-Because of how `surf` works, it's hard to "feed" it with stubbed HTML content.
-Other solutions include using some
-[HTTP mocking library](https://github.com/h2non/gock) or setuping some
-[local mock server](https://mockoon.com/). Also, this isn't a tool which gets 23
-releases per month, so I'm "testing" it manually.
+Run `go test ./...`. Login regression tests use a local HTTP server to check
+credential submission, session cookies, redirects, and failure handling without
+contacting mailbox.org or using real credentials. Live account behavior still
+requires manual verification.
 
 3. Why does it use `username`/`password` instead of token?
 
