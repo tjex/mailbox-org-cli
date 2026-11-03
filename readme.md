@@ -1,9 +1,10 @@
 # mailbox-org-cli
 
-> [!IMPORTANT] This client uses the direct mailbox.org management login, not the
-> public JavaScript/OIDC login. Your account must allow password-based
-> management login. The client does not perform interactive two-factor
-> authentication.
+> [!IMPORTANT]
+>
+> This client uses the direct mailbox.org management login, not the public
+> JavaScript/OIDC login. Your account must allow password-based management
+> login. The client does not perform interactive two-factor authentication.
 
 **Unoffical** command line "client" for managing
 [mailbox.org](https://mailbox.org)
