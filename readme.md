@@ -1,9 +1,9 @@
 # mailbox-org-cli
 
-> [!IMPORTANT]
-> This client uses the direct mailbox.org management login, not the public
-> JavaScript/OIDC login. Your account must allow password-based management login.
-> The client does not perform interactive two-factor authentication.
+> [!IMPORTANT] This client uses the direct mailbox.org management login, not the
+> public JavaScript/OIDC login. Your account must allow password-based
+> management login. The client does not perform interactive two-factor
+> authentication.
 
 **Unoffical** command line "client" for managing
 [mailbox.org](https://mailbox.org)
@@ -23,8 +23,8 @@ who has ceased development of the project. Issues and PRs are welcome here now!
 If you have Go installed, you can either:
 
 - install it from source `go install github.com/tjex/mailbox-org-cli@latest`
-- clone repository and build it by yourself: `go build .` (requires Go 1.20) or
-  `go install .` (installs to `${GOPATH}/bin`)
+- clone repository and build it by yourself: `make build` or `make install`
+  (installs to `${GOPATH}/bin`). Requires `go 1.20` or greater.
 
 ## Usage
 
@@ -53,7 +53,7 @@ Here is an example how you can use this command with
 [`pass`](https://www.passwordstore.org/) manager:
 
 ```text
-$ pass Email/mailbox.org | mailbox-org-cli --username you@example.com --password-on-stdin list
+$ pass email/mailbox.org | mailbox-org-cli --username you@example.com --password-on-stdin list
 
 [
   {
@@ -79,6 +79,7 @@ export MAILBOX_ORG_USERNAME="weak-email@mailbox.org"
 
 ```sh
 $ mailbox-org-cli renew --email aks92jasl943@temp.mailbox.org
+$ mailbox-org-cli renew --email aks92jasl943 # also works
 ```
 
 In terms of scripting, all output is JSON, so you can use
